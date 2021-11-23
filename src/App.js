@@ -3,25 +3,30 @@ import UserLogin from './components/UserLogin.component';
 import MainNav from './components/Nav.component';
 
 import CssBaseline from '@mui/material/CssBaseline';
-
-// import { UserContext } from "./contexts/User.context.jsx";
-// import { useState, useContext } from "react";
+import { UserContext } from "./contexts/User.context.jsx";
+import { useState} from "react";
 
 import './App.css';
 
-
-function App() {
-
+function App(props) {
+  
+  const [currentUser, setCurrentUser] = useState({})
+  const [isLogin, setIsLogin] = useState(false)
+  
+  const UserAccess = ({ children }) => {
+    return isLogin ? children : <UserLogin setCurrentUser={setCurrentUser} setIsLogin={setIsLogin}/>;
+  }
   
   return (
-    // <UserContext.Provider value="">
+    <UserContext.Provider value={currentUser}>
     <div className="App">
       <CssBaseline />
       <Header />
-      <UserLogin />
-      <MainNav />
+        <UserAccess>
+          <MainNav />
+        </UserAccess>
       </div>
-    // </UserContext.Provider>
+    </UserContext.Provider>
   );
 }
 
