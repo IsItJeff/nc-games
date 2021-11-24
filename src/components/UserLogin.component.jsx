@@ -1,5 +1,6 @@
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getUsers } from "../utils/Api.js"
 
 const UserLogin = (props) => {
@@ -49,9 +50,10 @@ const UserLogin = (props) => {
         <Grid container spacing={3} sx={{ bgcolor: "lightGrey" }}>
             {usersData.map((user) => {
                 return (
-                    <Grid key={user.user.username} item xs={4} onClick={()=>{userSelection(user.user)}} to={`/${user.user.username}/news`}>
-                                <Card sx={{ maxWidth: 345 }}>
-                                    <CardActionArea sx={{bgcolor:"text.disabled"}}>
+                    <Grid key={user.user.username} item xs={4}>
+                        <Card sx={{ maxWidth: 345 }}>
+                            <Link to={`/${user.user.username}/news`}>
+                                    <CardActionArea sx={{bgcolor:"text.disabled"}} onClick={() => { userSelection(user.user) }}>
                                         <CardMedia
                                                 component="img"
                                                 width="140"
@@ -68,7 +70,8 @@ const UserLogin = (props) => {
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
-                                </Card>
+                                </Link>
+                            </Card>
                     </Grid>
                 )
             }

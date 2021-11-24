@@ -9,6 +9,33 @@ export const getUsers = (user) => {
         .then((res) => {
             return res.data 
         }).catch((err) => {
-            return err
+            console.dir(err)
     })
+}
+
+export const getReviews = () => {
+    return apiReq.get(`/reviews`)
+        .then((res) => {
+            return res.data.reviews;
+        }).catch((err) => {
+            console.dir(err)
+        })
+}
+
+export const getReviewById = (reviewId) => {
+    return apiReq.get(`/reviews/${reviewId}`)
+        .then((res) => {
+            return res.data
+        }).catch((err) => {
+            console.dir(err)
+    })
+}
+
+export const getComments = (reviewId) => {
+    return apiReq.get(`/reviews/${reviewId}/comments`)
+        .then((res) => {
+            return res.data;
+        }).catch((err) => {
+            console.dir(err);
+        })
 }
