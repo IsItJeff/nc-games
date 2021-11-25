@@ -1,5 +1,7 @@
 .test-border {
-  border: 2 px solid black;
+  padding: 5px;
+  margin: 10px;
+  border: 2px solid black;
 }
 
 .header-container {
@@ -43,5 +45,15 @@
 
 .review-item {
   background-color: aliceblue;
-  margin: 20px;
+  width: 80vw;
+}
+
+.review-img {
+  width: 100px;
+  height: 100px;
+}
+
+.review-img-big {
+  width: 80%;
+  height: 400px;
 }

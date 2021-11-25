@@ -40,11 +40,29 @@ export const getComments = (reviewId) => {
         })
 }
 
-export const postComment = (reviewId, reviewBody) => {
-    return apiReq.post(`/reviews/${reviewId}/comments`, reviewBody)
+export const postComment = (reviewId, commentBody) => {
+    return apiReq.post(`/reviews/${reviewId}/comments`, commentBody)
         .then((res) => {
             return res;
         }).catch((err) => {
-        console.dir(err)
+            console.dir(err)
+    })
+}
+
+export const deleteComment = (commentId) => {
+    return apiReq.delete(`/comments/${commentId}`)
+        .then((res) => {
+            return res
+        }).catch((err) => {
+            console.dir(err)
+    })
+}
+
+export const addVoteToComment = (commentId, vote) => {
+    return apiReq.patch(`/comments/${commentId}`, vote)
+        .then((res) => {
+            return res
+        }).catch((err) => {
+            console.dir(err)
     })
 }
