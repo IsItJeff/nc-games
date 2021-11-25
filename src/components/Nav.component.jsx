@@ -7,10 +7,10 @@ const MainNav = () => {
     const user = useContext(UserContext);
 
     return (
-        <nav>
-            <Link to={`/${user.username}/news`}>News</Link>
-            <Link to={`/${user.username}/games`}>Games</Link>
-            <Link to={`/${user.username}/profile`}>Profile</Link>
+        <nav className="nav-container">
+            <Link className="nav-link" to={`/${user.username}/news`}>News</Link>
+            <Link className="nav-link" to={`/${user.username}/games`}>Games</Link>
+            <Link className="nav-link" to={`/${user.username}/profile`}>Profile</Link>
             <Switch />
         </nav>
     )

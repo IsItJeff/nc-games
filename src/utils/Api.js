@@ -34,8 +34,17 @@ export const getReviewById = (reviewId) => {
 export const getComments = (reviewId) => {
     return apiReq.get(`/reviews/${reviewId}/comments`)
         .then((res) => {
-            return res.data;
+            return res.data.comments;
         }).catch((err) => {
             console.dir(err);
         })
+}
+
+export const postComment = (reviewId, reviewBody) => {
+    return apiReq.post(`/reviews/${reviewId}/comments`, reviewBody)
+        .then((res) => {
+            return res;
+        }).catch((err) => {
+        console.dir(err)
+    })
 }

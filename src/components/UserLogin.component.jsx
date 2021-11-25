@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import {Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getUsers } from "../utils/Api.js"
@@ -47,7 +47,8 @@ const UserLogin = (props) => {
     if (isLoading) return (<div>Loading ... </div>)
     
     return (
-        <Grid container spacing={3} sx={{ bgcolor: "lightGrey" }}>
+        <Box sx= {{flexGrow:1}}>
+        <Grid container direction="row" alignItems="center"  spacing={3} sx={{ bgcolor: "lightGrey" }}>
             {usersData.map((user) => {
                 return (
                     <Grid key={user.user.username} item xs={4}>
@@ -76,7 +77,8 @@ const UserLogin = (props) => {
                 )
             }
             )}
-        </Grid>
+            </Grid>
+        </Box>
     )
 }
 
