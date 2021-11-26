@@ -1,9 +1,10 @@
-import { Typography, Button } from "@mui/material";
+import { Grid,Typography, Button } from "@mui/material";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User.context";
-import { deleteComment,getComments ,addVoteToComment } from "../utils/Api";
+import { deleteComment, getComments, addVoteToComment } from "../utils/Api";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const CommentButtons = ({ votes, author, commentId, reviewId, setReloadComments }) => {
+const CommentButtons = ({ votes, author, commentId, reviewId, setUsersComments }) => {
     
     const user = useContext(UserContext)
     
@@ -12,8 +13,9 @@ const CommentButtons = ({ votes, author, commentId, reviewId, setReloadComments 
     const removeComment = (commentId,reviewId) => {
         deleteComment(commentId)
             .then((res) => {
-                setReloadComments(true)
                 return  getComments(reviewId)
+            }).then((res) => {
+                return setUsersComments(res)
             }).catch((err) => {
                 console.log(err)
             })
@@ -28,26 +30,26 @@ const CommentButtons = ({ votes, author, commentId, reviewId, setReloadComments 
         
         addVoteToComment(commentId, voteObj)
             .then((res) => {
-                setVoteInc(0)
                 return getComments(reviewId)
-                console.log(res)
             }).catch((err) => {
                 console.log(err)
             })
     }
 
     return (
-    <div>
-        <Typography>
-            Votes : {votes + voteInc}
-        </Typography>
+        <Grid container justifyContent="space-between">
+            <Typography>
+                Votes : {votes + voteInc}
+            </Typography>
+            <Grid item>
             {author === user.username ?
-                <Button onClick={() => {
-                    removeComment(commentId, reviewId)
-                }}>Remove</Button> :
-                <Button onClick={() => {
-                voteComment()
-            }}>Vote Comment++</Button>}
-    </div>)
+            <Button onClick={() => {
+                removeComment(commentId, reviewId)
+            }}><HighlightOffIcon/></Button> :
+            <Button onClick={() => {
+            voteComment()
+        }}>Vote Comment++</Button>}
+        </Grid>
+    </Grid>)
 }
 export default CommentButtons;

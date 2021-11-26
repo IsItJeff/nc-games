@@ -1,7 +1,6 @@
 import {Accordion, AccordionDetails , Box, Grid ,Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getReviews } from "../utils/Api";
-
+import { getReviews, addVoteToReview } from "../utils/Api";
 import CommentContent from "./CommentContent.component";
 import ReviewSummary from "./ReviewSummary.component";
 import ReviewBody from "./ReviewBody.component";
@@ -32,21 +31,47 @@ const Games = () => {
             })
     }, [])
 
+    const [voteInc, setVoteInc] = useState(0);
+    
+    const voteReview = (reviewId) => {
+        setVoteInc(voteInc => voteInc + 1)
+        const voteObj = {
+            inc_votes : 1
+        }
+        addVoteToReview(reviewId, voteObj)
+            .then((res) => {
+                return res
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+
     
     if (isLoading) return (<div>Loading . . .</div>)
     if(err) return (<div> Error 404 Page not Found</div>)
     
     return (
-        <Box className="review-container " justifyContent="center">
+        <Box className="review-container" >
             <Typography variant="h2" className="header">Games</Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} justifyContent="center">
                 {usersReviews.map((review, index) => {
                     return (
                         <Grid item key={index} className="review-item">
                             <Accordion className="test-border" expanded={expanded === review.review_id} onChange={handleChange(review.review_id)}>
-                                <ReviewSummary title={review.title} votes={review.votes} img={review.review_img_url}/>
+                                <ReviewSummary 
+                                        category={review.category}
+                                        commentCount={review.comment_count}
+                                        title={review.title}
+                                        votes={review.votes + voteInc}
+                                        img={review.review_img_url} />
                                 <AccordionDetails >
-                                    <ReviewBody reviewId={review.review_id} body={review.review_body} img={review.review_img_url} owner={review.owner}/>
+                                    <ReviewBody
+                                        reviewId={review.review_id}
+                                        body={review.review_body}
+                                        img={review.review_img_url}
+                                        owner={review.owner}
+                                        votes={review.votes + voteInc}
+                                        voteReview={voteReview} />
                                     <CommentContent reviewId={review.review_id} />
                                 </AccordionDetails>
                             </Accordion>

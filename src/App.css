@@ -45,7 +45,13 @@
 
 .review-item {
   background-color: aliceblue;
+  padding: 0px;
+  margin: 0px;
   width: 80vw;
+}
+
+.review-body {
+  padding: 150px, 30px;
 }
 
 .review-img {
@@ -56,4 +62,24 @@
 .review-img-big {
   width: 100%;
   height: 400px;
+}
+
+.comment-item {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px;
+}
+
+.comment-body {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.add-comment-container {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px;
 }

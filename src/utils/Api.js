@@ -31,6 +31,15 @@ export const getReviewById = (reviewId) => {
     })
 }
 
+export const addVoteToReview = (reviewId, vote) => {
+    return apiReq.patch(`/reviews/${reviewId}`, vote)
+        .then((res) => {
+            return res
+        }).catch((err) => {
+            console.dir(err)
+    })
+}
+
 export const getComments = (reviewId) => {
     return apiReq.get(`/reviews/${reviewId}/comments`)
         .then((res) => {

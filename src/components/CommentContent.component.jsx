@@ -8,46 +8,50 @@ import CommentButtons from "./CommentButtons.component.jsx"
 const CommentContent = ({ reviewId }) => {
     
     const [usersComments, setUsersComments] = useState([]);
-    const [reloadComments, setReloadComments] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     
     useEffect(() => {
         setIsLoading(true)
-        setReloadComments(false)
 
         getComments(reviewId)
             .then((res) => {
                 setIsLoading(false)
-                setUsersComments(res)
+                return setUsersComments(res)
             }).catch((err) => {
                 console.log(err)
         })
-    }, [reviewId, reloadComments])
-    
+    }, [reviewId])
+
+
     if(isLoading)return(<div>Loading Comments ...</div>)
     return (
-        <div>
+        <Grid container justifyContent="center" rowSpacing={1} >
             { usersComments.map((comment) => {
                     return (
-                        <Grid item className="test-border" key={comment.comment_id}>
-                            <Typography>
-                                Author : {comment.author}
-                            </Typography>
-                            <Typography>
-                                Comment : {comment.body}
-                            </Typography>
+                        <Grid item className="comment-item" key={comment.comment_id} xs={8}>
                             <CommentButtons
-                                setReloadComments={setReloadComments}
+                                setUsersComments={setUsersComments}
                                 commentId={comment.comment_id}
                                 reviewId={reviewId}
                                 author={comment.author}
                                 votes={comment.votes} />
+                            <Typography pb={2}>
+                                Author : {comment.author}
+                            </Typography>
+                            <Typography >
+                                Comment :
+                                <Typography className="comment-body">
+                                    {comment.body}
+                                </Typography>
+                            </Typography>
                         </Grid>
                     )
                 })
             }
-            <AddComment reviewId={reviewId} setUsersComments={setUsersComments}/>
-        </div>
+            <Grid item  xs={8}>
+                <AddComment reviewId={reviewId} setUsersComments={setUsersComments} />
+            </Grid>
+        </Grid>
     )
 }
 
