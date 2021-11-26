@@ -9,6 +9,7 @@ const Games = () => {
 
     const [usersReviews, setUsersReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [voteInc, setVoteInc] = useState(0);
     const [err, setErr] = useState(null);
 
     const [expanded, setExpanded] = useState(false);
@@ -30,8 +31,6 @@ const Games = () => {
                 setErr("Error")
             })
     }, [])
-
-    const [voteInc, setVoteInc] = useState(0);
     
     const voteReview = (reviewId) => {
         setVoteInc(voteInc => voteInc + 1)
@@ -45,7 +44,6 @@ const Games = () => {
                 console.log(err)
             })
     }
-
     
     if (isLoading) return (<div>Loading . . .</div>)
     if(err) return (<div> Error 404 Page not Found</div>)

@@ -12,7 +12,6 @@ const CommentContent = ({ reviewId }) => {
     
     useEffect(() => {
         setIsLoading(true)
-
         getComments(reviewId)
             .then((res) => {
                 setIsLoading(false)

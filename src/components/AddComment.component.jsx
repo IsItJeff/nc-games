@@ -13,7 +13,6 @@ const AddComment = ({ reviewId , setUsersComments}) => {
             username: user.username,
             body: commentBody
         }
-
         postComment(reviewId, commentObj)
             .then((res) => {
                 return getComments(reviewId)

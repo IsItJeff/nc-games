@@ -1,6 +1,6 @@
 import { AccordionSummary, Grid ,Typography } from "@mui/material";
 
-const ReviewSummary = ({commentCount, category, title, img , votes}) => {
+const ReviewSummary = ({commentCount , category, title, img , votes}) => {
     return (
              <AccordionSummary
                 aria-controls="panel1bh-content"
